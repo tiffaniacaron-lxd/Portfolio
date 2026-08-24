@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiffani Caron — Learning Experience Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F4F0;
+    --paper-2:#EAEBE5;
+    --ink:#1E2A3A;
+    --slate:#5A6675;
+    --amber:#E8A93B;
+    --amber-dim: rgba(232,169,59,0.35);
+    --coral:#C1432B;
+    --line:#D7D8D1;
+    --white:#FFFFFF;
+    --maxw: 920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; margin:0; color:var(--ink);}
+
+  /* ---------- ANNOTATION SVG HELPERS ---------- */
+  .mark{position:relative; display:inline-block;}
+  .mark svg{position:absolute; pointer-events:none; overflow:visible;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,244,240,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .navwrap{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .navwrap .brand{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;}
+  .navwrap nav a{
+    color:var(--slate); text-decoration:none; font-size:0.9rem; margin-left:22px;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  .navwrap nav a:hover{color:var(--ink);}
+  .navwrap nav{display:flex; align-items:center;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:96px 0 72px; position:relative;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+    color:var(--slate); letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:18px; display:block;
+  }
+  .hero h1{font-size:clamp(2.4rem, 5vw, 3.6rem); line-height:1.08; letter-spacing:-0.01em;}
+  .hero .role{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    color:var(--coral);
+  }
+  .hero p.lede{
+    max-width:620px; margin-top:22px; font-size:1.12rem; color:var(--slate);
+  }
+  .hero .cta-row{margin-top:34px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:0.86rem;
+    padding:11px 20px; border-radius:2px; text-decoration:none;
+    border:1.5px solid var(--ink); color:var(--ink);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .btn.primary{background:var(--ink); color:var(--paper);}
+  .btn.primary:hover{background:var(--coral); border-color:var(--coral);}
+  .btn:not(.primary):hover{background:var(--ink); color:var(--paper);}
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section{padding:64px 0; border-top:1px solid var(--line);}
+  .section-head{margin-bottom:40px;}
+  .section-head .eyebrow{margin-bottom:8px;}
+  .section-head h2{font-size:1.9rem;}
+
+  .reveal{opacity:1;}
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  .hero .eyebrow, .hero h1, .hero p.lede, .hero .cta-row{
+    animation:fadeUp 0.7s ease both;
+  }
+  .hero h1{animation-delay:0.08s;}
+  .hero p.lede{animation-delay:0.16s;}
+  .hero .cta-row{animation-delay:0.24s;}
+
+  /* ---------- ABOUT / APPROACH ---------- */
+  .approach p{font-size:1.08rem; max-width:700px;}
+  .approach p + p{margin-top:16px;}
+  .pull{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    font-size:1.3rem; color:var(--ink); max-width:640px;
+    margin:28px 0; padding-left:22px; border-left:2px solid var(--amber);
+  }
+
+  /* ---------- CASE STUDIES ---------- */
+  .case{
+    background:var(--white); border:1px solid var(--line); border-radius:4px;
+    padding:36px; margin-bottom:28px;
+  }
+  .case-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:6px;}
+  .case-top .eyebrow{margin-bottom:0;}
+  .case h3{font-size:1.5rem; margin-bottom:14px;}
+  .case-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem;
+    color:var(--slate); border:1px solid var(--line); border-radius:20px;
+    padding:3px 11px;
+  }
+  .case-block{margin-bottom:16px;}
+  .case-block .label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; font-weight:600;
+    color:var(--coral); text-transform:uppercase; letter-spacing:0.06em;
+    display:block; margin-bottom:6px;
+  }
+  .case-block p{margin:0; color:var(--ink); font-size:0.98rem;}
+
+  .stat-strip{
+    display:flex; gap:28px; flex-wrap:wrap; margin-top:24px; padding-top:22px;
+    border-top:1px dashed var(--line);
+  }
+  .stat{position:relative; text-align:left;}
+  .stat .num{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:1.9rem;
+    color:var(--ink); position:relative; display:inline-block;
+  }
+  .stat .label{
+    display:block; font-size:0.78rem; color:var(--slate); margin-top:4px;
+    max-width:130px;
+  }
+  .stat.circled .num::after{
+    content:"";
+    position:absolute; left:-10px; right:-10px; top:-8px; bottom:-6px;
+    border:2px solid var(--amber);
+    border-radius:50% / 45%;
+    transform:rotate(-3deg);
+    pointer-events:none;
+  }
+
+  .tools-row{margin-top:18px; display:flex; flex-wrap:wrap; gap:8px;}
+  .tools-row span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem;
+    background:var(--paper-2); border-radius:3px; padding:4px 9px; color:var(--ink);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1.5px;
+    background:var(--line);
+  }
+  .tl-item{position:relative; margin-bottom:38px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-28px; top:5px; width:11px; height:11px;
+    border-radius:50%; background:var(--paper); border:2px solid var(--coral);
+  }
+  .tl-date{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--slate);
+    display:block; margin-bottom:4px;
+  }
+  .tl-item h3{font-size:1.2rem; margin-bottom:2px;}
+  .tl-item .org{color:var(--slate); font-size:0.92rem; margin-bottom:10px; display:block;}
+  .tl-item ul{margin:0; padding-left:18px;}
+  .tl-item li{margin-bottom:6px; font-size:0.96rem;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:28px;}
+  .skill-cat h4{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--coral); margin-bottom:12px; font-weight:600;
+  }
+  .skill-cat .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-cat .tags span{
+    background:var(--white); border:1px solid var(--line); border-radius:3px;
+    padding:6px 11px; font-size:0.88rem;
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item{margin-bottom:14px;}
+  .edu-item .deg{font-weight:600;}
+  .edu-item .meta{color:var(--slate); font-size:0.92rem; font-family:'IBM Plex Mono', monospace;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:64px 0 48px; border-top:1px solid var(--line);}
+  footer h2{font-size:1.8rem; margin-bottom:14px;}
+  footer p{color:var(--slate); max-width:480px;}
+  .contact-row{margin-top:26px; display:flex; gap:22px; flex-wrap:wrap;}
+  .contact-row a{
+    color:var(--ink); text-decoration:none; font-family:'IBM Plex Mono', monospace;
+    font-size:0.92rem; border-bottom:1.5px solid var(--amber); padding-bottom:2px;
+    display:inline-block;
+  }
+  .contact-row a:hover{color:var(--coral); border-color:var(--coral);}
+  .fineprint{margin-top:56px; font-size:0.78rem; color:var(--slate); font-family:'IBM Plex Mono', monospace;}
+
+  @media (max-width:600px){
+    .navwrap nav a{margin-left:14px; font-size:0.8rem;}
+    .hero{padding:64px 0 48px;}
+    .case{padding:24px;}
+    .stat-strip{gap:22px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="navwrap">
+    <div class="brand">Tiffani Caron</div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <span class="eyebrow">Learning Experience Designer</span>
+  <h1>Turning specialist knowledge<br>into <span class="role">learning people actually finish.</span></h1>
+  <p class="lede">
+    3 years designing online courses at Northeastern University, plus 12 years teaching
+    K–12 — I build learning experiences for audiences the source material wasn't written for,
+    and back the design decisions with outcome data.
+  </p>
+  <div class="cta-row">
+    <a class="btn primary" href="mailto:tiffani.a.caron@gmail.com">Get in touch</a>
+    <a class="btn" href="https://www.linkedin.com/in/tiffani-caron-086235217/" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="#work">See the work ↓</a>
+  </div>
+</section>
+
+<section class="approach wrap reveal">
+  <div class="section-head">
+    <span class="eyebrow">Approach</span>
+    <h2>Design starts where the source material runs out.</h2>
+  </div>
+  <p>
+    Most of my strongest work has started with a gap: graduate-level content built for
+    the wrong audience, a rubric that faculty didn't trust, a lesson that only worked
+    live and needed to survive on its own. The job is rarely "make it prettier." It's
+    figuring out what the learner actually needs to walk away with, then building the
+    scaffolding, sequencing, and feedback loops to get them there.
+  </p>
+  <p class="pull">
+    "I don't just translate content down a reading level. I restructure it around what the
+    audience needs to do with it."
+  </p>
+  <p>
+    That's meant curating open-source material, career-exploration tools, and AI-assisted
+    drafting into a single coherent course. It's also meant reframing the same instructional
+    change three different ways for a director, a faculty member, and a room of skeptical peers.
+    Below is a sample of that work.
+  </p>
+</section>
+
+<section id="work" class="wrap reveal">
+  <div class="section-head">
+    <span class="eyebrow">Selected Work</span>
+    <h2>Case studies</h2>
+  </div>
+
+  <div class="case">
+    <div class="case-top">
+      <span class="eyebrow">Pre-College Program · Northeastern University</span>
+      <span class="case-tag">Curriculum Redesign</span>
+    </div>
+    <h3>Healthcare Professions Course</h3>
+
+    <div class="case-block">
+      <span class="label">The Gap</span>
+      <p>The available graduate-level source material focused almost entirely on healthcare
+      business operations — supply chain, logistics — which would have given high school
+      learners a narrow, skewed view of the field instead of real exposure to the range of
+      healthcare careers.</p>
+    </div>
+
+    <div class="case-block">
+      <span class="label">The Approach</span>
+      <p>Restructured the course around "healthcare as a system": facility types, insurance,
+      how healthcare organizations function — then connected each piece to the professions
+      working within it. Curated open-source textbook material and a career-exploration
+      platform, and used AI-assisted drafting (reviewed and adapted for accuracy) to fill
+      remaining content gaps. Because the course ran fully asynchronous, I built a
+      self-directed career tracker so learners could log and reflect on their interests
+      without live facilitation.</p>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat circled">
+        <span class="num">93%</span>
+        <span class="label">completion rate (181 of 194 enrolled)</span>
+      </div>
+      <div class="stat">
+        <span class="num">36</span>
+        <span class="label">Net Promoter Score — vs. 32 higher-ed avg.</span>
+      </div>
+      <div class="stat">
+        <span class="num">4.7/5</span>
+        <span class="label">rated understanding of material</span>
+      </div>
+      <div class="stat">
+        <span class="num">76%</span>
+        <span class="label">wanted another course like it</span>
+      </div>
+    </div>
+
+    <div class="tools-row">
+      <span>Instructional Design</span><span>Curriculum Curation</span><span>AI-Assisted Drafting</span><span>Asynchronous Design</span><span>Canvas LMS</span>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-top">
+      <span class="eyebrow">Pre-College Program · Northeastern University</span>
+      <span class="case-tag">Technical Content Translation</span>
+    </div>
+    <h3>Artificial Intelligence Course</h3>
+    <div class="case-block">
+      <span class="label">The Work</span>
+      <p>Adapted graduate-level AI source material into an accessible pre-college curriculum,
+      translating technical concepts for a non-expert, asynchronous learner audience —
+      applying the same scaffolding approach used in the Healthcare course to a highly
+      technical subject moving faster than most curricula can keep up with.</p>
+    </div>
+    <div class="tools-row">
+      <span>Technical Content Design</span><span>Curriculum Development</span><span>Asynchronous Design</span>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-top">
+      <span class="eyebrow">Graduate Coursework Project</span>
+      <span class="case-tag">Authoring Tools</span>
+    </div>
+    <h3>eLearning Module — Articulate 360</h3>
+    <div class="case-block">
+      <span class="label">The Work</span>
+      <p>A short, self-paced module built to practice interactive branching and multimedia
+      sequencing in Articulate Storyline — one of the authoring tools I use to move course
+      design from static content into interactive, trackable eLearning.</p>
+    </div>
+    <div class="cta-row" style="margin-top:6px;">
+      <a class="btn" href="https://360.articulate.com/review/content/87c0bc54-38ad-4434-8fae-5754f2350328/review" target="_blank" rel="noopener">View module ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="wrap reveal">
+  <div class="section-head">
+    <span class="eyebrow">Background</span>
+    <h2>Experience</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-date">2023 — Present</span>
+      <h3>Learning Experience Designer</h3>
+      <span class="org">Northeastern University, Boston, MA</span>
+      <ul>
+        <li>Partner directly with subject matter experts (faculty) to design and build online learning experiences, guiding stakeholders through content, pedagogical, and technical decisions.</li>
+        <li>Design formative and summative assessments aligned to learning objectives, ensuring measurable mastery for learners.</li>
+        <li>Convert live and synchronous instruction into interactive, self-paced digital learning modules for broader and more diverse audiences.</li>
+        <li>Manage multiple concurrent learning design projects, balancing stakeholder needs, timelines, and quality standards.</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">2012 — 2023</span>
+      <h3>Elementary Teacher</h3>
+      <span class="org">Sharon Public Schools (MA) &amp; Fairfax County Public Schools (VA)</span>
+      <ul>
+        <li>Designed and delivered standards-aligned curricula and individualized programs of study, translating content into clear, measurable learning objectives.</li>
+        <li>Assessed learner progress on an ongoing basis, delivering clear feedback and reporting to learners and families.</li>
+        <li>Integrated technology and varied instructional strategies to drive engagement, contributing to cross-district initiatives including a countywide Capstone Project.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap reveal">
+  <div class="section-head">
+    <span class="eyebrow">Toolkit</span>
+    <h2>Skills &amp; Tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-cat">
+      <h4>Design</h4>
+      <div class="tags">
+        <span>Curriculum Design</span><span>Assessment Design</span><span>Asynchronous Learning</span><span>Content Curation</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <h4>Collaboration</h4>
+      <div class="tags">
+        <span>SME &amp; Faculty Partnership</span><span>Stakeholder Communication</span><span>Cross-Functional Teams</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <h4>Platforms</h4>
+      <div class="tags">
+        <span>Canvas LMS</span><span>CidiLabs</span><span>Articulate 360</span><span>Ed Puzzle</span><span>Canva</span><span>Google Workspace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <div class="section-head">
+    <span class="eyebrow">Education</span>
+    <h2>Education</h2>
+  </div>
+  <div class="edu-item">
+    <div class="deg">M.Ed. in eLearning and Instructional Design</div>
+    <div class="meta">Northeastern University, Boston, MA — 2023</div>
+  </div>
+  <div class="edu-item">
+    <div class="deg">B.S. Elementary Education</div>
+    <div class="meta">University of Nevada, Reno, NV — 2011</div>
+  </div>
+</section>
+
+<footer class="wrap reveal" id="contact">
+  <h2>Let's talk.</h2>
+  <p>Open to learning experience design, curriculum development, and enablement roles
+  where translating specialist knowledge into something people finish is the whole job.</p>
+  <div class="contact-row">
+    <a href="mailto:tiffani.a.caron@gmail.com">tiffani.a.caron@gmail.com</a>
+    <a href="tel:7755602930">775.560.2930</a>
+    <a href="https://www.linkedin.com/in/tiffani-caron-086235217/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <div class="fineprint">© 2026 Tiffani Caron</div>
+</footer>
+
+<script>
+  // Reduced-motion respected via CSS media query; no scroll-based JS needed.
+</script>
+
+</body>
+</html>
